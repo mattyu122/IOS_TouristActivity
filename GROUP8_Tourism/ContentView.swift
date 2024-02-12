@@ -89,42 +89,7 @@ struct ContentView: View {
                 
                 //Login Button
                 Button {
-                    
-                    
-                    if userNameFromUI.isEmpty || passwordFromUI.isEmpty {
-                        alertTitle = "INVALID CREDENTIALS"
-                        resultMessage = "Cannot be empty"
-                        alertConfirmation = "DISMISS"
-                        showAlert = true
-                        return
-                    }
-                    
-                    for user in users {
-                        if user.email == userNameFromUI && user.password == passwordFromUI {
-                            
-                            //If valid, user will be assigned to loggedInUser variable to pass on to next views
-                            loggedInUser.email = user.email
-                            loggedInUser.password = user.password
-                            loggedInUser.firstName = user.firstName
-                            loggedInUser.lastName = user.lastName
-                            loggedInUser.contactNumber = user.contactNumber
-                            
-                            
-                            isLoggedIn = true
-                            selectedLink = 1 //Go to HomeScreen
-                        
-                            return
-                            
-                        }
-                    
-                    }
-//                    authenticateUser(email: userNameFromUI, password: passwordFromUI)
-                    print("Incorrect Credentials")
-
-                    alertTitle = "INVALID CREDENTIALS"
-                    resultMessage = "Please try again"
-                    alertConfirmation = "DISMISS"
-                    showAlert = true
+                    authenticateUser(email: userNameFromUI, password: passwordFromUI)
 
                     print("\(userNameFromUI) \(passwordFromUI) \(rememberMe)")
                 } label: {
@@ -139,7 +104,7 @@ struct ContentView: View {
                 .fontWeight(/*@START_MENU_TOKEN@*/.semibold/*@END_MENU_TOKEN@*/)
                 .cornerRadius(/*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/)
                 .alert(isPresented: $showAlert){
-                    Alert(title: Text("\(alertTitle)"), 
+                    Alert(title: Text("\(alertTitle)"),
                           message: Text("\(resultMessage)"),
                           dismissButton: .default(Text("\(alertConfirmation)")){})
                 }
@@ -175,18 +140,8 @@ struct ContentView: View {
         }
         
         for user in users {
-            if user.email != email || user.password != password {
+            if user.email == email && user.password == password {
                 
-                
-                print("Incorrect Credentials")
-
-                alertTitle = "INVALID CREDENTIALS"
-                resultMessage = "Please try again"
-                alertConfirmation = "DISMISS"
-                showAlert = true
-                return
-                
-            } else {
                 //If valid, user will be assigned to loggedInUser variable to pass on to next views
                 loggedInUser.email = user.email
                 loggedInUser.password = user.password
@@ -197,8 +152,20 @@ struct ContentView: View {
                 
                 isLoggedIn = true
                 selectedLink = 1 //Go to HomeScreen
+            
+                return
+                
             }
+        
         }
+
+        //Invalid user
+        print("Incorrect Credentials")
+
+        alertTitle = "INVALID CREDENTIALS"
+        resultMessage = "Please try again"
+        alertConfirmation = "DISMISS"
+        showAlert = true
     }
 }
 
