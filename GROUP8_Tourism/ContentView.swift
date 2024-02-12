@@ -34,20 +34,29 @@ struct ContentView: View {
     @State var alertConfirmation: String = ""
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 
                 //Navigation Link Views
                 NavigationLink(destination: HomeScreen().environmentObject(self.loggedInUser), tag: 1, selection: $selectedLink){}
-                
-                
+
                 
                 Spacer()
                 
                 Image("travellogo")
+                    .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 200.0, height: 200.0)
-                
+                    .clipShape(Circle())
+                    .overlay(
+                        Circle()
+                            .stroke(Color.black, lineWidth: 0)
+                    )
+                    .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+
+
+
+                    
                 //Title
                 Text("Login")
                     .font(.title)
@@ -114,15 +123,12 @@ struct ContentView: View {
                 
             }
             .padding()
-            //            .background(Color.black)
             .navigationBarHidden(true)
-            //            .navigationTitle(/*@START_MENU_TOKEN@*/"Title"/*@END_MENU_TOKEN@*/)
-            //            .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color(hue: 0.261, saturation: 0.234, brightness: 0.951)/*@END_MENU_TOKEN@*/)
+            .background(Color.white)
+            
             
         }
         .padding()
-        .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color(red: 0.128, green: 0.262, blue: 0.337)/*@END_MENU_TOKEN@*/)
-        //        .ignoresSafeArea()
     }
     
     

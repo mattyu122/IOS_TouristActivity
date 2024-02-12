@@ -48,6 +48,7 @@ struct HomeScreen: View {
             
         }
         .navigationTitle(Text("Welcome, \(userData.fullName)"))
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar{
             ToolbarItem(placement: .navigationBarTrailing){
                 Menu {
@@ -63,6 +64,8 @@ struct HomeScreen: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
+        
         
     }
     
