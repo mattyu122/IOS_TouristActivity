@@ -14,17 +14,15 @@ struct ContentView: View {
     @State private var passwordFromUI: String = ""
     @State private var rememberMe = false
     
-    
+    let userDefaults = UserDefaults.standard
     //Users Instances
     let users: [User] = [
-        User(email: "123", password: "123", firstName: "John", lastName: "Doe", contactNumber: 6474334343),
-        User(email: "321", password: "321", firstName: "Jane", lastName: "Doe", contactNumber: 4164844342)
+        User(email: "123", password: "123", firstName: "John", lastName: "Doe", contactNumber: 6474334343, favoriteActivities: []),
+        User(email: "321", password: "321", firstName: "Jane", lastName: "Doe", contactNumber: 4164844342, favoriteActivities: [])
     ]
-    
     //Helper Variables
     @State private var selectedLink: Int? = 0
-    @State private var isLoggedIn = false
-    private var loggedInUser: User = User()
+    @EnvironmentObject var loggedInUser: User
     
     
     //Alert Variables
@@ -33,12 +31,13 @@ struct ContentView: View {
     @State var resultMessage: String = ""
     @State var alertConfirmation: String = ""
     
+    
     var body: some View {
         NavigationStack {
             VStack {
                 
                 //Navigation Link Views
-                NavigationLink(destination: HomeScreen().environmentObject(self.loggedInUser), tag: 1, selection: $selectedLink){}
+                NavigationLink(destination: HomeScreen(), tag: 1, selection: $selectedLink){}
 
                 
                 Spacer()
@@ -125,6 +124,9 @@ struct ContentView: View {
             .padding()
             .navigationBarHidden(true)
             .background(Color.white)
+            .onAppear{
+                checkLoginStatus()
+            }
             
             
         }
@@ -155,8 +157,9 @@ struct ContentView: View {
                 loggedInUser.lastName = user.lastName
                 loggedInUser.contactNumber = user.contactNumber
                 
-                
-                isLoggedIn = true
+                if rememberMe{
+                    userDefaults.set(true, forKey: AppSetting.IsLoggedIn.rawValue)
+                }
                 selectedLink = 1 //Go to HomeScreen
             
                 return
@@ -172,6 +175,13 @@ struct ContentView: View {
         resultMessage = "Please try again"
         alertConfirmation = "DISMISS"
         showAlert = true
+    }
+    
+    func checkLoginStatus(){
+        let isLoggedIn = userDefaults.bool(forKey: AppSetting.IsLoggedIn.rawValue)
+        if isLoggedIn{
+            selectedLink = 1
+        }
     }
 }
 

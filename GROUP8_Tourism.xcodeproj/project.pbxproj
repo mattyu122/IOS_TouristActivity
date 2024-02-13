@@ -19,6 +19,7 @@
 		0ADC45DF2B798D6700C86496 /* ActivitiesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADC45DE2B798D6700C86496 /* ActivitiesScreen.swift */; };
 		0ADC45E12B798D7700C86496 /* FavouritesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADC45E02B798D7700C86496 /* FavouritesScreen.swift */; };
 		0ADC45E32B798E6A00C86496 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADC45E22B798E6A00C86496 /* ProfileScreen.swift */; };
+		601A2EAD2B7BC9AE00A38143 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601A2EAC2B7BC9AE00A38143 /* Enum.swift */; };
 		F88B94AF2B7AA34900C8F7A8 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88B94AE2B7AA34900C8F7A8 /* Activity.swift */; };
 		F88B94B12B7AA35700C8F7A8 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88B94B02B7AA35700C8F7A8 /* Singleton.swift */; };
 		F88B94B32B7AA36700C8F7A8 /* ActivityRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88B94B22B7AA36700C8F7A8 /* ActivityRow.swift */; };
@@ -58,6 +59,7 @@
 		0ADC45DE2B798D6700C86496 /* ActivitiesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesScreen.swift; sourceTree = "<group>"; };
 		0ADC45E02B798D7700C86496 /* FavouritesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesScreen.swift; sourceTree = "<group>"; };
 		0ADC45E22B798E6A00C86496 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		601A2EAC2B7BC9AE00A38143 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		F88B94AE2B7AA34900C8F7A8 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		F88B94B02B7AA35700C8F7A8 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		F88B94B22B7AA36700C8F7A8 /* ActivityRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRow.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				F88B94B02B7AA35700C8F7A8 /* Singleton.swift */,
 				F88B94B22B7AA36700C8F7A8 /* ActivityRow.swift */,
 				F88B94B42B7AA37400C8F7A8 /* ActivityDetails.swift */,
+				601A2EAC2B7BC9AE00A38143 /* Enum.swift */,
 			);
 			path = GROUP8_Tourism;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 			files = (
 				0ADC45DF2B798D6700C86496 /* ActivitiesScreen.swift in Sources */,
 				F88B94B12B7AA35700C8F7A8 /* Singleton.swift in Sources */,
+				601A2EAD2B7BC9AE00A38143 /* Enum.swift in Sources */,
 				0ADC45E32B798E6A00C86496 /* ProfileScreen.swift in Sources */,
 				0ADC45E12B798D7700C86496 /* FavouritesScreen.swift in Sources */,
 				0ADC45DD2B7960F500C86496 /* HomeScreen.swift in Sources */,
@@ -458,6 +462,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GROUP8_Tourism/Preview Content\"";
+				DEVELOPMENT_TEAM = FY8J827N2U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -486,6 +491,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GROUP8_Tourism/Preview Content\"";
+				DEVELOPMENT_TEAM = FY8J827N2U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

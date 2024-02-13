@@ -15,7 +15,7 @@ struct HomeScreen: View {
     
     //Helper Variables
     @State private var selectedLink: Int? = 0
-    
+    let isLoggedInTag = "isLoggedIn"
     
     var body: some View {
         
@@ -73,6 +73,7 @@ struct HomeScreen: View {
     //Logout function
     func logout(){
         selectedLink = 1
+        UserDefaults.standard.removeObject(forKey: AppSetting.IsLoggedIn.rawValue)
     }
 }
 

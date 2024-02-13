@@ -9,11 +9,12 @@ import Foundation
 
 
 class User: CustomStringConvertible, ObservableObject {
-    var email: String
-    var password: String
-    var firstName: String
-    var lastName: String
-    var contactNumber: Int
+    @Published  var email: String
+    @Published  var password: String
+    @Published  var firstName: String
+    @Published  var lastName: String
+    @Published  var contactNumber: Int
+    @Published  var favoriteActivities: [Activity]
 //    var fullName: String
     
     
@@ -25,12 +26,13 @@ class User: CustomStringConvertible, ObservableObject {
         return "\(firstName) \(lastName)"
     }
     
-    init(email: String, password: String, firstName: String, lastName: String, contactNumber: Int) {
+    init(email: String, password: String, firstName: String, lastName: String, contactNumber: Int, favoriteActivities: [Activity]) {
         self.email = email
         self.password = password
         self.firstName = firstName
         self.lastName = lastName
         self.contactNumber = contactNumber
+        self.favoriteActivities = favoriteActivities
 //        self.fullName = firstName + lastName
     }
     
@@ -40,6 +42,7 @@ class User: CustomStringConvertible, ObservableObject {
         self.firstName = "NA"
         self.lastName = "NA"
         self.contactNumber = 0
+        favoriteActivities = []
 //        self.fullName = firstName + lastName
     }
     

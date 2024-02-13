@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct GROUP8_TourismApp: App {
+    var user = User()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(user)
         }
     }
 }
