@@ -41,6 +41,7 @@ struct ProfileScreen: View {
                 }
                 Button {
                     userData.firstName = firstNameFromUI
+                    userData.lastName = lastNameFromUI
                 } label: {
                     Text("Update")
                 }
