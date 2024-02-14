@@ -130,8 +130,8 @@ struct ContentView: View {
                 
                 //Remember me conditional
                 if UserDefaults.standard.bool(forKey: "REMEMBER_ME") {
-                    userNameFromUI = UserDefaults.standard.string(forKey: "USERNAME_KEY")!
-                    passwordFromUI = UserDefaults.standard.string(forKey: "PASSWORD_KEY")!
+                    userNameFromUI = UserDefaults.standard.string(forKey: "REMEMBER_USERNAME_KEY")!
+                    passwordFromUI = UserDefaults.standard.string(forKey: "REMEMBER_PASSWORD_KEY")!
                 }
                 
                 
@@ -172,10 +172,18 @@ struct ContentView: View {
                 if rememberMe{
                     UserDefaults.standard.set(email, forKey: AppSetting.USERNAME_KEY.rawValue)
                     UserDefaults.standard.set(password, forKey: AppSetting.PASSWORD_KEY.rawValue)
+                    
+                    
+                    UserDefaults.standard.set(email, forKey: "REMEMBER_USERNAME_KEY")
+                    UserDefaults.standard.set(password, forKey: "REMEMBER_PASSWORD_KEY")
                     UserDefaults.standard.set(rememberMe, forKey: "REMEMBER_ME")
                 } else {
                     UserDefaults.standard.removeObject(forKey: AppSetting.USERNAME_KEY.rawValue)
                     UserDefaults.standard.removeObject(forKey: AppSetting.PASSWORD_KEY.rawValue)
+                    
+                    
+                    UserDefaults.standard.removeObject(forKey: "REMEMBER_USERNAME_KEY")
+                    UserDefaults.standard.removeObject(forKey: "REMEMBER_PASSWORD_KEY")
                     UserDefaults.standard.removeObject(forKey: "REMEMBER_ME")
                 }
                 

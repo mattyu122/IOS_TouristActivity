@@ -52,8 +52,6 @@ struct HomeScreen: View {
             ToolbarItem(placement: .navigationBarTrailing){
                 Menu {
                     Button{
-                        
-                        //                    TODO: Place LOGOUT function here
                         logout()
                     } label: {
                         Text("Logout")
