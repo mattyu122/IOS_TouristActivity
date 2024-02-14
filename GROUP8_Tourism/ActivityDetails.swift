@@ -49,16 +49,12 @@ struct ActivityDetails: View {
                     .padding(.bottom, 2)
                 
                 Button(action: {
-//                    let telephone = "tel://"
-//                    let formattedNumber = activity.contact.replacingOccurrences(of: "-", with: "")
-//                    guard let url = URL(string: telephone + formattedNumber) else { return }
-//                    
-//                    if UIApplication.shared.canOpenURL(url) {
-//                        UIApplication.shared.open(url)
-//                    } else {
-//                        // Handle the error or present an alert to the user
-//                        print("Unable to open the URL")
-//                    }
+                    let telephone = "tel://"
+                    let formattedNumber = activity.contact
+                    guard let url = URL(string: telephone + formattedNumber) else { return }
+                    
+                    UIApplication.shared.open(url)
+
                 }) {
                     Text(activity.contact)
                         .foregroundColor(.blue)

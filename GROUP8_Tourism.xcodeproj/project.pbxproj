@@ -118,7 +118,6 @@
 				0ADC45B22B79429F00C86496 /* ContentView.swift */,
 				0ADC45B42B7942A000C86496 /* Assets.xcassets */,
 				0ADC45B62B7942A000C86496 /* Preview Content */,
-				0ADC45DA2B7943FA00C86496 /* User.swift */,
 				0ADC45DC2B7960F500C86496 /* HomeScreen.swift */,
 				0ADC45DE2B798D6700C86496 /* ActivitiesScreen.swift */,
 				0ADC45E02B798D7700C86496 /* FavouritesScreen.swift */,
@@ -126,6 +125,7 @@
 				F88B94AE2B7AA34900C8F7A8 /* Activity.swift */,
 				F88B94B02B7AA35700C8F7A8 /* Singleton.swift */,
 				F88B94B22B7AA36700C8F7A8 /* ActivityRow.swift */,
+				0ADC45DA2B7943FA00C86496 /* User.swift */,
 				F88B94B42B7AA37400C8F7A8 /* ActivityDetails.swift */,
 				601A2EAC2B7BC9AE00A38143 /* Enum.swift */,
 			);
