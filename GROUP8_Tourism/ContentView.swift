@@ -35,12 +35,14 @@ struct ContentView: View {
     
     
     var body: some View {
+        
+        
         NavigationStack {
+            
+            //Navigation Link Views
+            NavigationLink(destination: HomeScreen(), tag: 1, selection: $selectedLink){}
+            
             VStack {
-                
-                //Navigation Link Views
-                NavigationLink(destination: HomeScreen(), tag: 1, selection: $selectedLink){}
-
                 
                 Spacer()
                 
@@ -54,10 +56,7 @@ struct ContentView: View {
                             .stroke(Color.black, lineWidth: 0)
                     )
                     .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-
-
-
-                    
+                
                 //Title
                 Text("Login")
                     .font(.title)
@@ -100,13 +99,13 @@ struct ContentView: View {
                 //Login Button
                 Button {
                     authenticateUser(email: userNameFromUI, password: passwordFromUI)
-
+                    
                     print("\(userNameFromUI) \(passwordFromUI) \(rememberMe)")
                 } label: {
                     Text("Login")
                     
                 }
-                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                .padding()
                 .frame(width: 150.0, height: 50.0)
                 .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color(red: 0.128, green: 0.262, blue: 0.337)/*@END_MENU_TOKEN@*/)
                 .foregroundColor(/*@START_MENU_TOKEN@*/.white/*@END_MENU_TOKEN@*/)
@@ -119,7 +118,6 @@ struct ContentView: View {
                           dismissButton: .default(Text("\(alertConfirmation)")){})
                 }
                 //----------------------
-                
                 Spacer()
                 
             }
@@ -130,12 +128,18 @@ struct ContentView: View {
                 checkLoginStatus()
                 
                 
-                if UserDefaults.standard.string(forKey: "USERNAME_KEY") != nil && UserDefaults.standard.string(forKey: "PASSWORD_KEY") != nil {
+                //Remember me conditional
+                if UserDefaults.standard.bool(forKey: "REMEMBER_ME") {
                     userNameFromUI = UserDefaults.standard.string(forKey: "USERNAME_KEY")!
                     passwordFromUI = UserDefaults.standard.string(forKey: "PASSWORD_KEY")!
                 }
+                
+                
+                //isLoggedIn conditional
+                if userDefaults.bool(forKey: "ISLOGGEDIN_KEY") {
+                    authenticateUser(email: "\(userDefaults.string(forKey: "USERNAME_KEY") ?? "")", password: "\(userDefaults.string(forKey: "PASSWORD_KEY") ?? "")")
+                }
             }
-            
             
         }
         .padding()
@@ -165,26 +169,34 @@ struct ContentView: View {
                 loggedInUser.lastName = user.lastName
                 loggedInUser.contactNumber = user.contactNumber
                 
-                if rememberMe{
-                    UserDefaults.standard.set(email, forKey: "USERNAME_KEY")
-                    UserDefaults.standard.set(password, forKey: "PASSWORD_KEY")
+                
+                if rememberMe {
+                    UserDefaults.standard.set(rememberMe, forKey: "REMEMBER_ME")
+                    UserDefaults.standard.set(email, forKey: "REMEMBER_USERNAME_KEY")
+                    UserDefaults.standard.set(password, forKey: "REMEMBER_PASSWORD_KEY")
                 } else {
-                    UserDefaults.standard.removeObject(forKey: "USERNAME_KEY")
-                    UserDefaults.standard.removeObject(forKey: "PASSWORD_KEY")
+                    UserDefaults.standard.set(rememberMe, forKey: "REMEMBER_ME")
+                    UserDefaults.standard.removeObject(forKey: "REMEMBER_USERNAME_KEY")
+                    UserDefaults.standard.removeObject(forKey: "REMEMBER_PASSWORD_KEY")
                 }
                 
+                UserDefaults.standard.set(email, forKey: "USERNAME_KEY")
+                UserDefaults.standard.set(password, forKey: "PASSWORD_KEY")
+                
                 isLoggedIn = true
+                UserDefaults.standard.setValue(isLoggedIn, forKey: "ISLOGGEDIN_KEY")
+                
                 selectedLink = 1 //Go to HomeScreen
-            
+                
                 return
                 
             }
-        
+            
         }
-
+        
         //Invalid user
         print("Incorrect Credentials")
-
+        
         alertTitle = "INVALID CREDENTIALS"
         resultMessage = "Please try again"
         alertConfirmation = "DISMISS"

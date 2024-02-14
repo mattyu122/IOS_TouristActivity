@@ -58,6 +58,7 @@ struct HomeScreen: View {
                         logout()
                     } label: {
                         Text("Logout")
+                        
                     }
                 } label: {
                     Image(systemName: "ellipsis.circle.fill")
@@ -72,6 +73,10 @@ struct HomeScreen: View {
     
     //Logout function
     func logout(){
+        
+        UserDefaults.standard.removeObject(forKey: "ISLOGGEDIN_KEY")
+        
+        
         selectedLink = 1
         UserDefaults.standard.removeObject(forKey: AppSetting.IsLoggedIn.rawValue)
     }
