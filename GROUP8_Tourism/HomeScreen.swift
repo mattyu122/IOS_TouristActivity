@@ -15,11 +15,10 @@ struct HomeScreen: View {
     
     //Helper Variables
     @State private var selectedLink: Int? = 0
-    let isLoggedInTag = "isLoggedIn"
     
     var body: some View {
         
-                NavigationLink(destination: ContentView(), tag: 1, selection: $selectedLink){}
+        NavigationLink(destination: ContentView(), tag: 1, selection: $selectedLink){}
         
         VStack {
             
@@ -78,7 +77,8 @@ struct HomeScreen: View {
         
         
         selectedLink = 1
-        UserDefaults.standard.removeObject(forKey: AppSetting.IsLoggedIn.rawValue)
+        UserDefaults.standard.removeObject(forKey: AppSetting.USERNAME_KEY.rawValue)
+        UserDefaults.standard.removeObject(forKey: AppSetting.PASSWORD_KEY.rawValue)
     }
 }
 

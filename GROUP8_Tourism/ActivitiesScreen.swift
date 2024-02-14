@@ -13,10 +13,6 @@ struct ActivitiesScreen: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text("Things To Do in City")
-                    .font(.system(size: 24, weight: .bold))
-                    .multilineTextAlignment(.center)
-                    .padding()
                 
                 List(activities) { activity in
                     NavigationLink(destination: ActivityDetails(activity: activity)) {
@@ -24,6 +20,8 @@ struct ActivitiesScreen: View {
                     }
                 }
             }
+            .navigationTitle("Things To Do in City")
+            .padding()
         }
     }
 }

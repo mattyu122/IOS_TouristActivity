@@ -169,15 +169,14 @@ struct ContentView: View {
                 loggedInUser.lastName = user.lastName
                 loggedInUser.contactNumber = user.contactNumber
                 
-                
-                if rememberMe {
+                if rememberMe{
+                    UserDefaults.standard.set(email, forKey: AppSetting.USERNAME_KEY.rawValue)
+                    UserDefaults.standard.set(password, forKey: AppSetting.PASSWORD_KEY.rawValue)
                     UserDefaults.standard.set(rememberMe, forKey: "REMEMBER_ME")
-                    UserDefaults.standard.set(email, forKey: "REMEMBER_USERNAME_KEY")
-                    UserDefaults.standard.set(password, forKey: "REMEMBER_PASSWORD_KEY")
                 } else {
-                    UserDefaults.standard.set(rememberMe, forKey: "REMEMBER_ME")
-                    UserDefaults.standard.removeObject(forKey: "REMEMBER_USERNAME_KEY")
-                    UserDefaults.standard.removeObject(forKey: "REMEMBER_PASSWORD_KEY")
+                    UserDefaults.standard.removeObject(forKey: AppSetting.USERNAME_KEY.rawValue)
+                    UserDefaults.standard.removeObject(forKey: AppSetting.PASSWORD_KEY.rawValue)
+                    UserDefaults.standard.removeObject(forKey: "REMEMBER_ME")
                 }
                 
                 UserDefaults.standard.set(email, forKey: "USERNAME_KEY")
@@ -204,7 +203,10 @@ struct ContentView: View {
     }
     
     func checkLoginStatus(){
-        let isLoggedIn = userDefaults.bool(forKey: AppSetting.IsLoggedIn.rawValue)
+        if let userName_key = userDefaults.string(forKey: AppSetting.USERNAME_KEY.rawValue), let password_key = userDefaults.string(forKey: AppSetting.PASSWORD_KEY.rawValue){
+            isLoggedIn = true
+        }
+
         if isLoggedIn{
             selectedLink = 1
         }
