@@ -10,9 +10,11 @@ import SwiftUI
 struct ContentView: View {
     
     //UI variables
+    @State private var rememberMe = false
     @State private var userNameFromUI: String = ""
     @State private var passwordFromUI: String = ""
-    @State private var rememberMe = false
+    @State private var isLoggedIn = false
+    
     
     let userDefaults = UserDefaults.standard
     //Users Instances
@@ -126,6 +128,12 @@ struct ContentView: View {
             .background(Color.white)
             .onAppear{
                 checkLoginStatus()
+                
+                
+                if UserDefaults.standard.string(forKey: "USERNAME_KEY") != nil && UserDefaults.standard.string(forKey: "PASSWORD_KEY") != nil {
+                    userNameFromUI = UserDefaults.standard.string(forKey: "USERNAME_KEY")!
+                    passwordFromUI = UserDefaults.standard.string(forKey: "PASSWORD_KEY")!
+                }
             }
             
             
@@ -158,8 +166,14 @@ struct ContentView: View {
                 loggedInUser.contactNumber = user.contactNumber
                 
                 if rememberMe{
-                    userDefaults.set(true, forKey: AppSetting.IsLoggedIn.rawValue)
+                    UserDefaults.standard.set(email, forKey: "USERNAME_KEY")
+                    UserDefaults.standard.set(password, forKey: "PASSWORD_KEY")
+                } else {
+                    UserDefaults.standard.removeObject(forKey: "USERNAME_KEY")
+                    UserDefaults.standard.removeObject(forKey: "PASSWORD_KEY")
                 }
+                
+                isLoggedIn = true
                 selectedLink = 1 //Go to HomeScreen
             
                 return
