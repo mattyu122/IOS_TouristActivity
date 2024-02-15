@@ -49,3 +49,35 @@ struct ContentView_Previews: PreviewProvider {
 #Preview {
     ContentView()
 }
+
+struct SearchBar: View {
+    @Binding var text: String
+
+    var body: some View {
+        HStack {
+            TextField("Search", text: $text)
+                .padding(8)
+                .padding(.horizontal, 25)
+                .background(Color(.systemGray6))
+                .cornerRadius(8)
+                .padding(.horizontal, 10)
+            
+            if !text.isEmpty {
+                Button(action: {
+                    self.text = ""
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(Color(.systemGray2))
+                        .padding(8)
+                }
+                .buttonStyle(BorderlessButtonStyle())
+            }
+        }
+    }
+}
+
+struct SearchBar_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchBar(text: .constant(""))
+    }
+}
