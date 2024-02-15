@@ -17,13 +17,19 @@ struct ActivitiesScreen: View {
         if searchText.isEmpty {
             return activities
         } else {
-            return activities.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+            return activities.filter { $0.name.lowercased().contains(searchText.lowercased()) }
         }
     }
     
     var body: some View {
         NavigationView {
             VStack {
+                
+                Text("Things To Do in Niagara")
+                    .font(.system(size: 24, weight: .bold))
+                    .multilineTextAlignment(.center)
+                    .padding()
+                
                 SearchBar(text: $searchText)
                     .padding(.horizontal)
                 
@@ -33,21 +39,15 @@ struct ActivitiesScreen: View {
                     }
                 }
             }
-            .navigationTitle("Things To Do in City")
-            .padding()
+            .navigationBarTitle("", displayMode: .inline)
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ActivitiesScreen()
     }
-}
-
-
-#Preview {
-    ContentView()
 }
 
 struct SearchBar: View {
