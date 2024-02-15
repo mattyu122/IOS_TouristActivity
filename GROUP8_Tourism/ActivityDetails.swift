@@ -70,13 +70,14 @@ struct ActivityDetails: View {
                     }
                     Button(action:{
                         isFavorite.toggle()
-                        if !isFavorite {
-                            // Remove from favorites
-                            user.favoriteActivities.removeAll { $0 == activity }
-                        } else {
-                            // Add to favorites
-                            user.favoriteActivities.append(activity)
-                        }
+                        favoriteActivity(isFavorite: isFavorite)
+//                        if !isFavorite {
+//                            // Remove from favorites
+//                            user.favoriteActivities.removeAll { $0 == activity }
+//                        } else {
+//                            // Add to favorites
+//                            user.favoriteActivities.append(activity)
+//                        }
                     }){
                         Label("Favorite", systemImage: isFavorite ? "heart.fill" : "heart")
                             .foregroundColor(isFavorite ? .red: .gray)
@@ -98,6 +99,23 @@ struct ActivityDetails: View {
                 isFavorite = user.favoriteActivities.contains(activity)
                 print(user.favoriteActivities)
             }
+        }
+    }
+    
+    private func favoriteActivity(isFavorite: Bool) {
+        let currentActivity = UserDefaults.standard.data(forKey: user.fullName) ?? Data()
+        var realCurrentActivity = (try? JSONDecoder().decode([Activity].self, from:currentActivity)) ?? []
+        if(isFavorite){
+            user.favoriteActivities.append(activity)
+            realCurrentActivity.append(activity)
+
+        }else{
+            user.favoriteActivities.removeAll { $0 == activity }
+            realCurrentActivity.removeAll { $0 == activity}
+        }
+        
+        if let updatedCurrentActivity = try? JSONEncoder().encode(realCurrentActivity){
+            UserDefaults.standard.set(updatedCurrentActivity, forKey: user.fullName)
         }
     }
     

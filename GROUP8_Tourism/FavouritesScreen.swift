@@ -10,18 +10,21 @@ import SwiftUI
 struct FavouritesScreen: View {
     @EnvironmentObject var user : User
     @State var showAlert = false
+    @State var favoriteActivityList: [Activity] = []
     var body: some View {
         NavigationView {
             VStack {
                 
-                if !user.favoriteActivities.isEmpty{
+                if !favoriteActivityList.isEmpty{
                     List{
-                        ForEach(user.favoriteActivities, id:\.id){ activity in
+                        ForEach(favoriteActivityList, id:\.id){ activity in
                             NavigationLink(destination: ActivityDetails(activity:activity)){
                                 ActivityRow(activity: activity)
                             }
                         }.onDelete(perform: { indexSet in
-                            user.favoriteActivities.remove(atOffsets: indexSet)
+                            favoriteActivityList.remove(atOffsets: indexSet)
+                            saveFavoriteActivityList(list: &favoriteActivityList)
+
                         })
                     }
                 }else{
@@ -47,10 +50,23 @@ struct FavouritesScreen: View {
                 )
             })
         }
+        
+        .onAppear{
+            let currentActivityList = UserDefaults.standard.data(forKey: user.fullName) ?? Data()
+            favoriteActivityList = (try? JSONDecoder().decode([Activity].self, from: currentActivityList)) ?? []
+            
+        }
     }
     
     private func deleteAll(){
-        user.favoriteActivities.removeAll()
+        favoriteActivityList.removeAll()
+        saveFavoriteActivityList(list: &favoriteActivityList)
+    }
+    
+    private func saveFavoriteActivityList(list: inout [Activity]){
+        if let updatedFavoriteActivityList = try? JSONEncoder().encode(list){
+            UserDefaults.standard.set(updatedFavoriteActivityList, forKey: user.fullName)
+        }
     }
 }
 

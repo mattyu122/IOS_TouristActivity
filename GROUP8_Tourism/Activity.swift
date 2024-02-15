@@ -8,12 +8,12 @@
 import Foundation
 import SwiftUI
 
-class Activity: Identifiable, Equatable {
+class Activity: Identifiable, Equatable, Codable {
     static func == (lhs: Activity, rhs: Activity) -> Bool {
         return lhs.id == rhs.id
     }
     
-    let id = UUID()
+    var id = UUID()
     
     let name: String
     let pricePerPerson: Double
